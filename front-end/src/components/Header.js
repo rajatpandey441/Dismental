@@ -13,8 +13,9 @@ export default function Header({ data }) {
     <>
       <chakra.header id="header">
         <Flex w="100%" px="6" py="5" align="center" justify="space-between">
-          <Image src={Logo} h="50px" />
-
+          <Link to={"/"}>
+            <Image src={Logo} h="50px" />
+          </Link>
           <HStack display={{ base: "none", md: "flex" }} as="nav" spacing="5">
             {data.map((item, i) => (
               <Link key={i} to={item.link}>
