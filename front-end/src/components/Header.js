@@ -1,14 +1,17 @@
 import { Image, Flex, Button, HStack, chakra } from "@chakra-ui/react";
 import Logo from "../logo.svg";
-import { Link } from "react-router-dom";
-import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useRef } from "react";
 import MobileDrawer from "./MobileDrawer";
 import Login from "./Login";
+import AuthContext from "./shared/AuthContext";
 
 const CTA = "Login";
 
 export default function Header({ data }) {
+  const { user, logout } = useContext(AuthContext);
   const loginCompRef = useRef();
+  const navigate = useNavigate();
   return (
     <>
       <chakra.header id="header">
@@ -25,10 +28,35 @@ export default function Header({ data }) {
           </HStack>
 
           <HStack>
-            <Button onClick={() => loginCompRef.current.onOpen()}>{CTA}</Button>
-            <Button>
-              <Link to="/signup">SignUp</Link>
-            </Button>
+            {user ? (
+              <Button
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                Profile
+              </Button>
+            ) : (
+              <Button onClick={() => loginCompRef.current.onOpen()}>
+                {CTA}
+              </Button>
+            )}
+
+            {user ? (
+              <Button
+                onClick={() => {
+                  logout();
+                  window.location.reload();
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Link to="/signup">
+                <Button>SignUp</Button>
+              </Link>
+            )}
+
             <MobileDrawer data={data} />
           </HStack>
         </Flex>
