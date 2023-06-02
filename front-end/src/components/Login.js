@@ -1,4 +1,9 @@
-import React, { forwardRef, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import {
   Modal,
   ModalOverlay,
@@ -15,6 +20,7 @@ import {
   Button,
   InputGroup,
 } from "@chakra-ui/react";
+import AuthContext from "./shared/AuthContext";
 
 const Login = forwardRef((props, ref) => {
   //hook for calling method from parent to child
@@ -25,15 +31,21 @@ const Login = forwardRef((props, ref) => {
   const [show, setShow] = React.useState(false);
   const handleShowClick = () => setShow(!show);
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const usernameRef = useRef(null);
+  const pwdRef = useRef(null);
+  const { login, logout } = useContext(AuthContext);
+
+  const loginSubmit = async () => {
+    let payload = {
+      username: usernameRef.current.value,
+      password: pwdRef.current.value,
+    };
+    console.log(usernameRef.current.value);
+    console.log(pwdRef.current.value);
+    await login(payload);
+  };
   return (
-    <Modal
-      initialFocusRef={initialRef}
-      finalFocusRef={finalRef}
-      isOpen={isOpen}
-      onClose={onClose}
-    >
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Happiness is waiting for you!</ModalHeader>
@@ -41,13 +53,17 @@ const Login = forwardRef((props, ref) => {
         <ModalBody pb={6}>
           <FormControl>
             <FormLabel>Username</FormLabel>
-            <Input ref={initialRef} placeholder="Username" />
+            <Input ref={usernameRef} placeholder="Username" />
           </FormControl>
 
           <FormControl mt={4}>
             <FormLabel>Password</FormLabel>
             <InputGroup>
-              <Input placeholder="Password" type={show ? "text" : "password"} />
+              <Input
+                ref={pwdRef}
+                placeholder="Password"
+                type={show ? "text" : "password"}
+              />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleShowClick}>
                   {show ? "Hide" : "Show"}
@@ -58,7 +74,7 @@ const Login = forwardRef((props, ref) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3}>
+          <Button colorScheme="blue" mr={3} onClick={loginSubmit}>
             Login
           </Button>
           <Button onClick={onClose}>Cancel</Button>

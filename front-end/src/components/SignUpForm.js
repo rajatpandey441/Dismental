@@ -13,7 +13,7 @@ import React from "react";
 
 const SignUpForm = () => {
   const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const handleClick = () => setShow(!show); // handling password show button
   return (
     <>
       <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">

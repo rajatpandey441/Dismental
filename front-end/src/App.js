@@ -8,6 +8,7 @@ import Reviews from "./components/Reviews";
 
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/business" element={<Business />} />
         <Route path="/therapists" element={<Therapists />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
