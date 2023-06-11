@@ -1,4 +1,4 @@
-package com.dismental.auth;
+package com.dismental.dto;
 
 public class AuthenticationRequest {
 	private String username;

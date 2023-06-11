@@ -1,4 +1,4 @@
-package com.dismental.auth;
+package com.dismental.dto;
 
 import com.dismental.entity.User;
 

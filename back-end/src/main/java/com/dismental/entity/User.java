@@ -22,12 +22,15 @@ import jakarta.persistence.Table;
 @Table(name="users")
 public class User implements UserDetails{
 	public User() {}
-	public User(String username, String password, Role role) {
+	public User(String name, String password, String email, String username,  Role role) {
 		
+		
+		this.name = name;
+		this.password = password;
+		this.email = email;
+		this.username = username;
 		List<Authority> authorities = new ArrayList<Authority>();
 		authorities.add(new Authority(role.name()));
-		this.username = username;
-		this.password = password;
 		this.authorities = authorities;
 	}
 	@Id
@@ -35,6 +38,8 @@ public class User implements UserDetails{
 	private long id;
 	private String username;
 	private String password;
+	private String name;
+	private String email;
 	
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="user")
 	@JsonIgnore
@@ -87,6 +92,23 @@ public class User implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", email="
+				+ email + ", authorities=" + authorities + "]";
 	}
 	
 	
