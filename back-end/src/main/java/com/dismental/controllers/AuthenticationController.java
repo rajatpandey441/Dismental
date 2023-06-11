@@ -1,8 +1,5 @@
 package com.dismental.controllers;
 
-import com.dismental.auth.AuthenticationRequest;
-import com.dismental.auth.AuthenticationResponse;
-import com.dismental.auth.RegisterRequest;
 import com.dismental.services.AuthenticateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dismental.dto.AuthenticationRequest;
+import com.dismental.dto.AuthenticationResponse;
+import com.dismental.dto.RegisterRequest;
 import com.dismental.entity.User;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -56,5 +56,10 @@ public class AuthenticationController {
 		catch(ExpiredJwtException ex) {
 			return ResponseEntity.ok(false);
 		}
+	}
+	//DM-12 - Signup flow Enhancement. Return true if username exist and false if username doesnt exist
+	@GetMapping("/checkUserNameExistence")
+	public ResponseEntity<?> checkUserNameExistence(@RequestParam String username){
+		return ResponseEntity.ok(service.checkUserNameExistence(username));
 	}
 }

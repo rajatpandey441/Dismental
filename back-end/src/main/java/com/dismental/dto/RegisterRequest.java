@@ -1,9 +1,28 @@
-package com.dismental.auth;
+package com.dismental.dto;
 
 public class RegisterRequest {
 	private String username;
 	private String password;
 	private String registeredRole;
+	private String email;
+	private String name;
+	@Override
+	public String toString() {
+		return "RegisterRequest [username=" + username + ", password=" + password + ", registeredRole=" + registeredRole
+				+ ", email=" + email + ", name=" + name + "]";
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getRegisteredRole() {
 		return registeredRole;
 	}

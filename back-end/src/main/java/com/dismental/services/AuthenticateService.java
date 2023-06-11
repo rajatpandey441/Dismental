@@ -1,8 +1,5 @@
 package com.dismental.services;
 
-import com.dismental.auth.AuthenticationRequest;
-import com.dismental.auth.AuthenticationResponse;
-import com.dismental.auth.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dismental.config.JWTService;
+import com.dismental.dto.AuthenticationRequest;
+import com.dismental.dto.AuthenticationResponse;
+import com.dismental.dto.RegisterRequest;
 import com.dismental.entity.Authority;
 import com.dismental.enums.Role;
 import com.dismental.entity.User;
@@ -51,7 +51,7 @@ public class AuthenticateService {
 			System.out.println("exception caught - "+ex);
 			role = Role.USER;
 		}
-		User user = new User(request.getUsername(),passwordEncoder.encode(request.getPassword()),role);
+		User user = new User(request.getName(),passwordEncoder.encode(request.getPassword()),request.getEmail(),request.getUsername(),role);
 		Authority authority = new Authority(role.name());
 		authority.setUser(user);
 		userRepository.save(user);
@@ -72,5 +72,12 @@ public class AuthenticateService {
 	public Boolean isTokenValid(String token, User user) {
 		// TODO Auto-generated method stub
 		return jwtService.isTokenValid(token, user);
+	}
+	
+	//DM-12 - Signup flow Enhancement
+	public Boolean checkUserNameExistence(String userName) {	
+		System.out.println("got uname "+userName);
+		User user = userRepository.findByUsername(userName).orElse(null);
+		return user != null ? true : false;
 	}
 }
