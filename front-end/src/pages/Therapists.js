@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "./Header";
 import { headerData } from "../utils/constants/headerData";
+import Header from "../components/Header";
 
-const Reviews = () => {
+const Therapists = () => {
   return (
     <>
       <Header data={headerData} />
@@ -10,4 +10,4 @@ const Reviews = () => {
   );
 };
 
-export default Reviews;
+export default Therapists;

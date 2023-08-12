@@ -1,14 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
-import SignUp from "./components/SignUp";
-import About from "./components/About";
-import Business from "./components/Business";
-import Therapists from "./components/Therapists";
-import Reviews from "./components/Reviews";
+import SignUp from "./pages/SignUp";
+import About from "./pages/About";
+import Business from "./pages/Business";
+import Therapists from "./pages/Therapists";
+import Reviews from "./pages/Reviews";
 
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
