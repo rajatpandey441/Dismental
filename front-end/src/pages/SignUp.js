@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { headerData } from "../utils/constants/headerData";
-import Header from "./Header";
-import QuestionForm from "./QuestionForm";
+import Header from "../components/Header";
+import QuestionForm from "../components/QuestionForm";
 import {
   Box,
   Heading,
@@ -9,7 +9,7 @@ import {
   ScaleFade,
   useDisclosure,
 } from "@chakra-ui/react";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "../components/SignUpForm";
 
 const GetStarted = () => {
   const [step, setStep] = useState(0);

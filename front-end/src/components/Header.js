@@ -1,4 +1,11 @@
-import { Image, Flex, Button, HStack, chakra } from "@chakra-ui/react";
+import {
+  Image,
+  Flex,
+  Button,
+  HStack,
+  chakra,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import Logo from "../logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useContext, useRef } from "react";
@@ -14,7 +21,16 @@ export default function Header({ data }) {
   const navigate = useNavigate();
   return (
     <>
-      <chakra.header id="header">
+      <chakra.header
+        id="header"
+        zIndex={1000}
+        bg={useColorModeValue("white", "gray.900")}
+        display={{ md: "absolute" }}
+        position={{ md: "fixed" }}
+        top={0}
+        left={0}
+        w="100%"
+      >
         <Flex w="100%" px="6" py="5" align="center" justify="space-between">
           <Link to={"/"}>
             <Image src={Logo} h="50px" />

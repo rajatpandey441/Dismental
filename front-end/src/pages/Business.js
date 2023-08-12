@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "./Header";
 import { headerData } from "../utils/constants/headerData";
+import Header from "../components/Header";
 
-const Profile = () => {
+const Business = () => {
   return (
     <>
       <Header data={headerData} />
-      Placeholder
     </>
   );
 };
 
-export default Profile;
+export default Business;
